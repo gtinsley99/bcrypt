@@ -23,6 +23,23 @@ const registerUser = async (req, res) => {
     };
 };
 
+const listAllUsers = async (req, res) => {
+    try {
+        const listAllUsers = await User.findAll({});
+        res.status(200).json({
+            message: "All users from the database are:",
+            userlist: listAllUsers,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(501).json({
+            message: error.message,
+            detail: error,
+        });
+    };
+};
+
 module.exports = {
     registerUser,
+    listAllUsers,
 }
