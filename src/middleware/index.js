@@ -21,12 +21,11 @@ const hashPassword = async (req, res, next) => {
 // Checks if username + password matches user in db
 const passwordCheck = async (req, res, next) => {
   try {
-    let match = false;
     const userDetails = await User.findOne({
       where: { username: req.body.username },
     });
     if (userDetails) {
-      const compare = await bcrypt.compare(
+      const match = await bcrypt.compare(
         req.body.password,
         userDetails.password
       );
@@ -36,12 +35,8 @@ const passwordCheck = async (req, res, next) => {
     };
     // If not a match gives error, doesn't reach next
     if (!match || userDetails === undefined) {
-      const error = new Error("Password and username do not match");
-      res.status(501).json({
-        message: error.message,
-        error: error,
-      });
-    }
+      throw new Error("Password and username do not match");
+    };
     next();
   } catch (error) {
     console.log(error);
