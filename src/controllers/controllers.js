@@ -39,7 +39,25 @@ const listAllUsers = async (req, res) => {
     };
 };
 
+const deleteUser = async (req, res) => {
+    try {
+        const userDetails = await User.findOne({where: {username: req.body.username}});
+        await userDetails.destroy();
+        res.status(200).json({
+            message: "User deleted",
+            username: userDetails.username,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(501).json({
+            message: error.message,
+            detail: error,
+        });
+    };
+};
+
 module.exports = {
     registerUser,
     listAllUsers,
+    deleteUser,
 }

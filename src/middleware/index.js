@@ -21,11 +21,12 @@ const hashPassword = async (req, res, next) => {
 // Checks if username + password matches user in db
 const passwordCheck = async (req, res, next) => {
   try {
+    let match = false;
     const userDetails = await User.findOne({
       where: { username: req.body.username },
     });
     if (userDetails) {
-      const match = await bcrypt.compare(
+      const compare = await bcrypt.compare(
         req.body.password,
         userDetails.password
       );
