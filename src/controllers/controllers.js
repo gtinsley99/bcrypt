@@ -1,4 +1,5 @@
 const User = require("../models/users");
+const {hashPassword} = require("../middleware/index");
 
 const registerUser = async (req, res) => {
   try {
@@ -58,30 +59,19 @@ const deleteUser = async (req, res) => {
   }
 };
 
-const updateUser = async (req, res) => {
+const updateUserEmail = async (req, res) => {
   try {
     const userDetails = await User.findOne({
       where: { username: req.body.username },
     });
-    if (req.body.newusername === undefined){
-        req.body.newusername = userDetails.username;
-    };
-    if (req.body.newemail === undefined){
-        req.body.newemail = userDetails.email;
-    };
-    if (req.body.newpassword === undefined){
-        req.body.newpassword = userDetails.password;
-    };
     await userDetails.update({
-        username: req.body.newusername,
         email: req.body.newemail,
-        password: req.body.newpassword
     });
     await userDetails.save();
-    req.body.username = req.body.newusername;
     res.status(200).json({
-        message: "User details updated",
-        username: req.body.newusername
+        message: "User email updated",
+        username: req.body.newusername,
+        email: req.body.newemail
     });
   } catch (error) {
     console.log(error);
@@ -96,5 +86,5 @@ module.exports = {
   registerUser,
   listAllUsers,
   deleteUser,
-  updateUser,
+  updateUserEmail,
 };

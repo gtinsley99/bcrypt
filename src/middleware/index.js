@@ -7,7 +7,6 @@ const hashPassword = async (req, res, next) => {
     const saltRounds = parseInt(process.env.SALT);
     const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
     req.body.password = hashedPassword;
-    console.log("Entering hashPassword try area");
     next();
   } catch (error) {
     console.log(error);
