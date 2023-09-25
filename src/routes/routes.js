@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const userRouter = Router();
-const { registerUser, listAllUsers, deleteUser, updateUserEmail } = require("../controllers/controllers");
+const { registerUser, listAllUsers, deleteUser, updateEmail, updatePassword } = require("../controllers/controllers");
 const { hashPassword, passwordCheck } = require("../middleware");
 
 // Route to add a user, password hashed before add to db
@@ -13,6 +13,9 @@ userRouter.get("/users/listallusers", passwordCheck, listAllUsers);
 userRouter.delete("/users/deleteuser", passwordCheck, deleteUser);
 
 // Route to update email
-userRouter.put("/users/updateuser", passwordCheck, updateUserEmail);
+userRouter.put("/users/updateemail", passwordCheck, updateEmail);
+
+// Route to update password
+userRouter.put("/users/updatepassword", passwordCheck, hashPassword, updatePassword);
 
 module.exports = userRouter;

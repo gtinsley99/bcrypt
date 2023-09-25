@@ -4,6 +4,9 @@ const bcrypt = require("bcrypt");
 // Encrypts user password to store in db
 const hashPassword = async (req, res, next) => {
   try {
+    if (req.body.newpassword !== undefined){
+        req.body.password = req.body.newpassword
+    };
     const saltRounds = parseInt(process.env.SALT);
     const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
     req.body.password = hashedPassword;

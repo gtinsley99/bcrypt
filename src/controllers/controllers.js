@@ -1,5 +1,5 @@
 const User = require("../models/users");
-const {hashPassword} = require("../middleware/index");
+const { hashPassword } = require("../middleware/index");
 
 const registerUser = async (req, res) => {
   try {
@@ -59,19 +59,41 @@ const deleteUser = async (req, res) => {
   }
 };
 
-const updateUserEmail = async (req, res) => {
+const updateEmail = async (req, res) => {
   try {
     const userDetails = await User.findOne({
       where: { username: req.body.username },
     });
     await userDetails.update({
-        email: req.body.newemail,
+      email: req.body.newemail,
     });
     await userDetails.save();
     res.status(200).json({
-        message: "User email updated",
-        username: req.body.newusername,
-        email: req.body.newemail
+      message: "User email updated",
+      username: req.body.newusername,
+      email: req.body.newemail,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(501).json({
+      message: error.message,
+      detail: error,
+    });
+  }
+};
+
+const updatePassword = async (req, res) => {
+  try {
+    const userDetails = await User.findOne({
+      where: { username: req.body.username },
+    });
+    await userDetails.update({
+      password: req.body.password,
+    });
+    await userDetails.save();
+    res.status(200).json({
+      message: "User password updated",
+      username: req.body.username
     });
   } catch (error) {
     console.log(error);
@@ -86,5 +108,6 @@ module.exports = {
   registerUser,
   listAllUsers,
   deleteUser,
-  updateUserEmail,
+  updateEmail,
+  updatePassword,
 };
