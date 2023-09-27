@@ -1,5 +1,5 @@
 const User = require("../models/users");
-const { hashPassword } = require("../middleware/index");
+const jwt = require("jsonwebtoken");
 
 const registerUser = async (req, res) => {
   try {
@@ -8,18 +8,28 @@ const registerUser = async (req, res) => {
       email: req.body.email,
       password: req.body.password,
     });
+    const privateKey = process.env.JWTPASSWORD;
+    const payload = {
+      username: req.body.username
+    };
+    const options = {
+      expiresIn: "7d"
+    };
+    const token = jwt.sign(payload, privateKey, options);
+    console.log(token);
     res.status(201).json({
       message: "User registered",
       user: {
         username: user.username,
         email: user.email,
+        token: token
       },
     });
   } catch (error) {
     console.log(error);
     res.status(501).json({
       message: error.message,
-      detail: error,
+      detail: error
     });
   }
 };
@@ -35,7 +45,7 @@ const listAllUsers = async (req, res) => {
     console.log(error);
     res.status(501).json({
       message: error.message,
-      detail: error,
+      detail: error
     });
   }
 };
@@ -53,7 +63,7 @@ const deleteUser = async (req, res) => {
     console.log(error);
     res.status(501).json({
       message: error.message,
-      detail: error,
+      detail: error
     });
   }
 };
@@ -76,7 +86,7 @@ const updateEmail = async (req, res) => {
     console.log(error);
     res.status(501).json({
       message: error.message,
-      detail: error,
+      detail: error
     });
   }
 };
@@ -98,7 +108,7 @@ const updatePassword = async (req, res) => {
     console.log(error);
     res.status(501).json({
       message: error.message,
-      detail: error,
+      detail: error
     });
   }
 };
