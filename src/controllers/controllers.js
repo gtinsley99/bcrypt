@@ -8,14 +8,7 @@ const registerUser = async (req, res) => {
       email: req.body.email,
       password: req.body.password,
     });
-    const privateKey = process.env.JWTPASSWORD;
-    const payload = {
-      username: req.body.username
-    };
-    const options = {
-      expiresIn: "7d"
-    };
-    const token = jwt.sign(payload, privateKey, options);
+    const token = jwt.sign({username: req.body.username}, process.env.JWTPASSWORD, {expiresIn: "7d"});
     console.log(token);
     res.status(201).json({
       message: "User registered",
@@ -116,14 +109,7 @@ const updatePassword = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     const user = await User.findOne({where: {username: req.body.username}});
-    const privateKey = process.env.JWTPASSWORD;
-    const payload = {
-      username: req.body.username
-    };
-    const options = {
-      expiresIn: "7d"
-    };
-    const token = jwt.sign(payload, privateKey, options);
+    const token = jwt.sign({username: req.body.username}, process.env.JWTPASSWORD, {expiresIn: "7d"});
     console.log(token);
     res.status(201).json({
       message: "User logged in",
