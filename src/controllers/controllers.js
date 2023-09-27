@@ -32,7 +32,7 @@ const listAllUsers = async (req, res) => {
     const listAllUsers = await User.findAll({});
     res.status(200).json({
       message: "All users from the database are:",
-      userlist: listAllUsers,
+      userlist: listAllUsers.map((user) => user.username),
     });
   } catch (error) {
     console.log(error);
