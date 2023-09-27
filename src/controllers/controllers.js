@@ -94,7 +94,7 @@ const updateEmail = async (req, res) => {
 const updatePassword = async (req, res) => {
   try {
     const userDetails = await User.findOne({
-      where: { username: req.body.username },
+      where: { username: req.user.username },
     });
     await userDetails.update({
       password: req.body.password,
@@ -102,7 +102,36 @@ const updatePassword = async (req, res) => {
     await userDetails.save();
     res.status(200).json({
       message: "User password updated",
+      username: req.user.username
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(501).json({
+      message: error.message,
+      detail: error
+    });
+  }
+};
+
+const loginUser = async (req, res) => {
+  try {
+    const user = await User.findOne({where: {username: req.body.username}});
+    const privateKey = process.env.JWTPASSWORD;
+    const payload = {
       username: req.body.username
+    };
+    const options = {
+      expiresIn: "7d"
+    };
+    const token = jwt.sign(payload, privateKey, options);
+    console.log(token);
+    res.status(201).json({
+      message: "User logged in",
+      user: {
+        username: user.username,
+        email: user.email,
+        token: token
+      },
     });
   } catch (error) {
     console.log(error);
@@ -119,4 +148,5 @@ module.exports = {
   deleteUser,
   updateEmail,
   updatePassword,
+  loginUser
 };
