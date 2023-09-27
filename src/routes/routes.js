@@ -10,10 +10,10 @@ userRouter.post("/users/register", hashPassword, registerUser);
 userRouter.get("/users/listallusers", tokenCheck, listAllUsers);
 
 // Route to delete user, passwordCheck 'guards' this
-userRouter.delete("/users/deleteuser", passwordCheck, deleteUser);
+userRouter.delete("/users/deleteuser", tokenCheck, deleteUser);
 
 // Route to update email
-userRouter.put("/users/updateemail", passwordCheck, updateEmail);
+userRouter.put("/users/updateemail", tokenCheck, updateEmail);
 
 // Route to update password
 userRouter.put("/users/updatepassword", tokenCheck, hashPassword, updatePassword);

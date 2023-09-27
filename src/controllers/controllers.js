@@ -53,7 +53,7 @@ const listAllUsers = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     const userDetails = await User.destroy({
-      where: { username: req.body.username },
+      where: { username: req.user.username },
     });
     res.status(200).json({
       message: "User deleted",
@@ -71,7 +71,7 @@ const deleteUser = async (req, res) => {
 const updateEmail = async (req, res) => {
   try {
     const userDetails = await User.findOne({
-      where: { username: req.body.username },
+      where: { username: req.user.username },
     });
     await userDetails.update({
       email: req.body.newemail,
@@ -79,7 +79,7 @@ const updateEmail = async (req, res) => {
     await userDetails.save();
     res.status(200).json({
       message: "User email updated",
-      username: req.body.newusername,
+      username: req.body.username,
       email: req.body.newemail,
     });
   } catch (error) {
