@@ -10,15 +10,15 @@ userRouter.post("/users/register", hashPassword, registerUser);
 userRouter.get("/users/listallusers", tokenCheck, listAllUsers);
 
 // Route to delete user with token check
-userRouter.delete("/users/deleteuser", tokenCheck, deleteUser);
+userRouter.delete("/users/deleteuser", passwordCheck, deleteUser);
 
 // Route to update email with token check
 userRouter.put("/users/updateemail", tokenCheck, updateEmail);
 
 // Route to update password with token check
-userRouter.put("/users/updatepassword", tokenCheck, hashPassword, updatePassword);
+userRouter.put("/users/updatepassword", passwordCheck, hashPassword, updatePassword);
 
 // Route to login and create token
-userRouter.get("/users/login", passwordCheck, loginUser);
+userRouter.post("/users/login", passwordCheck, loginUser);
 
 module.exports = userRouter;
