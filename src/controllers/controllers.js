@@ -1,5 +1,5 @@
 const User = require("../models/users");
-const { hashPassword } = require("../middleware/index");
+const jwt = require("jsonwebtoken");
 
 const registerUser = async (req, res) => {
   try {
@@ -8,18 +8,21 @@ const registerUser = async (req, res) => {
       email: req.body.email,
       password: req.body.password,
     });
+    const token = jwt.sign({username: req.body.username}, process.env.JWTPASSWORD, {expiresIn: "7d"});
+    console.log(token);
     res.status(201).json({
       message: "User registered",
       user: {
         username: user.username,
         email: user.email,
+        token: token
       },
     });
   } catch (error) {
     console.log(error);
     res.status(501).json({
       message: error.message,
-      detail: error,
+      detail: error
     });
   }
 };
@@ -35,7 +38,7 @@ const listAllUsers = async (req, res) => {
     console.log(error);
     res.status(501).json({
       message: error.message,
-      detail: error,
+      detail: error
     });
   }
 };
@@ -53,7 +56,7 @@ const deleteUser = async (req, res) => {
     console.log(error);
     res.status(501).json({
       message: error.message,
-      detail: error,
+      detail: error
     });
   }
 };
@@ -61,7 +64,7 @@ const deleteUser = async (req, res) => {
 const updateEmail = async (req, res) => {
   try {
     const userDetails = await User.findOne({
-      where: { username: req.body.username },
+      where: { username: req.user.username },
     });
     await userDetails.update({
       email: req.body.newemail,
@@ -69,14 +72,14 @@ const updateEmail = async (req, res) => {
     await userDetails.save();
     res.status(200).json({
       message: "User email updated",
-      username: req.body.newusername,
+      username: req.body.username,
       email: req.body.newemail,
     });
   } catch (error) {
     console.log(error);
     res.status(501).json({
       message: error.message,
-      detail: error,
+      detail: error
     });
   }
 };
@@ -98,7 +101,29 @@ const updatePassword = async (req, res) => {
     console.log(error);
     res.status(501).json({
       message: error.message,
-      detail: error,
+      detail: error
+    });
+  }
+};
+
+const loginUser = async (req, res) => {
+  try {
+    const user = await User.findOne({where: {username: req.body.username}});
+    const token = jwt.sign({username: req.body.username}, process.env.JWTPASSWORD, {expiresIn: "7d"});
+    console.log(token);
+    res.status(201).json({
+      message: "User logged in",
+      user: {
+        username: user.username,
+        email: user.email,
+        token: token
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(501).json({
+      message: error.message,
+      detail: error
     });
   }
 };
@@ -109,4 +134,5 @@ module.exports = {
   deleteUser,
   updateEmail,
   updatePassword,
+  loginUser
 };

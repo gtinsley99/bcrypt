@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken")
 const User = require("../models/users");
 const bcrypt = require("bcrypt");
 
@@ -37,7 +38,7 @@ const passwordCheck = async (req, res, next) => {
       };
     };
     // If not a match gives error, doesn't reach next
-    if (!match || userDetails === undefined) {
+    if (!match) {
       throw new Error("Password and username do not match");
     };
     next();
@@ -50,7 +51,27 @@ const passwordCheck = async (req, res, next) => {
   }
 };
 
+const tokenCheck = async (req, res, next) => {
+  try {
+    const username = jwt.verify(req.header("Authorization").replace("Bearer ",""), process.env.JWTPASSWORD).username;
+    const user = await User.findOne({where: {username: username}});
+    if (!user){
+      throw new Error ("User not found");
+    } else {
+      req.user = user;
+      next();
+    };
+  } catch (error) {
+    console.log(error);
+    res.status(501).json({
+      message: error.message,
+      error: error,
+    });
+  }
+};
+
 module.exports = {
   hashPassword,
   passwordCheck,
+  tokenCheck
 };
