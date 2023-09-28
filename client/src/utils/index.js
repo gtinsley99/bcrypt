@@ -51,6 +51,7 @@ export const RegisterRoute = async (regUsername, regEmail, regPassword, setUser,
       const data = await res.json();
       console.log(data);
       setUser(data.user.username);
+      console.log(data.user.username);
     } catch (error) {
       console.log(error);
       setError(error);

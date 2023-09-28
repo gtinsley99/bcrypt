@@ -7,7 +7,7 @@ const Login = (props) => {
 
   const loginSubmit = async (e) => {
     e.preventDefault();
-    LoginRoute(username, password, props.setRes, props.setUser, props.setError, props.setShowModal);
+    LoginRoute(username, password, props.setUser, props.setError, props.setShowModal);
     setUsername("");
     setPassword("");
   };

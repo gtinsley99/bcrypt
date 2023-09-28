@@ -20,10 +20,22 @@ const registerUser = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+    if (error.errors[0].message === "username must be unique"){
+      res.status(409).json({
+        message: "Username taken"
+      });
+      return;
+    } else if (error.errors[0].message === "Validation is on email failed"){
+      res.status(400).json({
+        message: "Invalid email address"
+      });
+      return;
+    }
     res.status(501).json({
       message: error.message,
       detail: error
     });
+  
   }
 };
 
