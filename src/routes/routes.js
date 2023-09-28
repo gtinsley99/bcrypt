@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const userRouter = Router();
-const { registerUser, listAllUsers, deleteUser, updateEmail, updatePassword, loginUser } = require("../controllers/controllers");
+const { registerUser, listAllUsers, deleteUser, updateEmail, updatePassword, loginUser, loginWithToken } = require("../controllers/controllers");
 const { hashPassword, passwordCheck, tokenCheck } = require("../middleware");
 
 // Route to add a user, password hashed before add to db
@@ -20,5 +20,8 @@ userRouter.put("/users/updatepassword", passwordCheck, hashPassword, updatePassw
 
 // Route to login and create token
 userRouter.post("/users/login", passwordCheck, loginUser);
+
+// Route to login with token
+userRouter.get("/users/loginwithtoken", tokenCheck, loginWithToken);
 
 module.exports = userRouter;

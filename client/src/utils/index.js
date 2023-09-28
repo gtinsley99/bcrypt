@@ -104,4 +104,27 @@ export const RegisterRoute = async (regUsername, regEmail, regPassword, setUser,
       setError(error);
       setShowModal(true);
     }
+  };
+
+  export const ListAllUsersRoute = async (jwt_token, setUsersList, setError, setShowModal) => {
+    try {
+      const res = await fetch("http://localhost:80/users/updatepassword", {
+        method: "GET",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${jwt_token}` 
+        },
+       });
+      if (!res.ok) {
+        throw new Error(res.statusText);
+      };
+      const data = await res.json();
+      console.log(data);
+      setUsersList(data);
+      setShowModal(true);
+    } catch (error) {
+      console.log(error);
+      setError(error);
+      setShowModal(true);
+    }
   }

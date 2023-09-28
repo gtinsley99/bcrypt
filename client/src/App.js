@@ -40,15 +40,16 @@ function App() {
         setError={setError}
       />
       <ChangeUserData
-        setShowUsers={setShowUsers}
+        showUsers={setShowUsers}
         setError={setError}
         setUser={setUser}
         setShowDelModal={setShowDelModal}
         setShowUpdPassModal={setShowUpdPassModal}
         setShowUpdEmailModal={setShowUpdEmailModal}
+        setUsersList={setUsersList}
       />
       {showUsers && (
-        <AllUsersModal setShowUsers={setShowUsers} usersList={usersList} setError={setError} />
+        <AllUsersModal setShowModal={setShowUsers} usersList={usersList} setError={setError} />
       )}
       {showLogErrorModal && (
         <LoginErrorModal setShowModal={setShowLogErrorModal} setError={setError} />

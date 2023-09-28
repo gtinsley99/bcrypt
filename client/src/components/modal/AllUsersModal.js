@@ -1,4 +1,9 @@
 const Modal = (props) => {
+  const handleClick = (e) => {
+    e.preventDefault();
+    props.setShowModal(false);
+    props.setError(null);
+  };
   return (
     <div className="modalBackgrnd">
       <div className="modal">
@@ -11,7 +16,7 @@ const Modal = (props) => {
           </div>
           );
         })} */}
-        <button onClick={() => props.setShowUsers(false)}>Close</button>
+        <button onClick={handleClick}>Close</button>
       </div>
     </div>
   );

@@ -24,7 +24,7 @@ const UpdatePassword = (props) => {
       <h2>Update password</h2>
       <form onSubmit={handleSubmit}>
         <div className="inputField">
-          <label>Username</label>
+          <label>Username:</label>
           <input
             placeholder="Insert username here..."
             value={username}
@@ -41,7 +41,7 @@ const UpdatePassword = (props) => {
           ></input>
         </div>
         <div className="inputField">
-          <label>New Password</label>
+          <label>New Password:</label>
           <input
             placeholder="Insert new password here..."
             type="password"
