@@ -8,7 +8,7 @@ const Register = (props) => {
 
   const formSubmit = async (e) => {
     e.preventDefault();
-    RegisterRoute(regUsername, regEmail, regPassword, props.setUser, props.setError, props.setShowModal);
+    await RegisterRoute(regUsername, regEmail, regPassword, props.setUser, props.setError, props.setShowModal);
     setRegUsername("");
     setRegEmail("");
     setRegPassword("");
@@ -19,29 +19,26 @@ const Register = (props) => {
       <h2>Make an account</h2>
       <form className="userLogin" onSubmit={formSubmit}>
         <div className="inputField">
-          <label for="usernameRegister">Username:</label>
+          <label>Username:</label>
           <input
-            useid="usernameRegister"
             placeholder="Insert username here..."
             onChange={(e) => setRegUsername(e.target.value)}
             value={regUsername}
           ></input>
         </div>
         <div className="inputField">
-          <label for="emailRegister">Email:</label>
+          <label>Email:</label>
           <input
             type="email"
-            useid="emailRegister"
             placeholder="Insert email here..."
             onChange={(e) => setRegEmail(e.target.value)}
             value={regEmail}
           ></input>
         </div>
         <div className="inputField">
-          <label for="passwordRegister">Password:</label>
+          <label>Password:</label>
           <input
             type="password"
-            useid="passwordRegister"
             placeholder="Insert password here..."
             onChange={(e) => setRegPassword(e.target.value)}
             value={regPassword}
