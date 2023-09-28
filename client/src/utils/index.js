@@ -13,7 +13,7 @@ export const Usersapi = async (setUsersList) => {
 
 export const LoginRoute = async (logUsername, logPassword, setRes, setShowModal) => {
   try {
-    const res = await fetch("http://localhost:80/users/login", {
+    const res = await fetch("http://localhost/users/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

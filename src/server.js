@@ -13,7 +13,7 @@ app.use(express.json());
 
 // Creates table if not found in db
 const syncTables = () => {
-    User.sync();
+    User.sync({alter: true});
 };
 
 

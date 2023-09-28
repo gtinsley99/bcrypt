@@ -2,8 +2,8 @@ import {useState} from "react";
 import { LoginRoute } from "../../utils";
 
 const Login = (props) => {
-  const [username, setUsername] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const loginSubmit = async (e) => {
     e.preventDefault();

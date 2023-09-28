@@ -2,9 +2,9 @@ import { useState } from "react";
 import { RegisterRoute } from "../../utils";
 
 const Register = (props) => {
-  const [regUsername, setRegUsername] = useState(null);
-  const [regEmail, setRegEmail] = useState(null);
-  const [regPassword, setRegPassword] = useState(null);
+  const [regUsername, setRegUsername] = useState("");
+  const [regEmail, setRegEmail] = useState("");
+  const [regPassword, setRegPassword] = useState("");
 
   const formSubmit = async (e) => {
     e.preventDefault();
