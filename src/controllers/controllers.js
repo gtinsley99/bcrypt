@@ -45,6 +45,7 @@ const listAllUsers = async (req, res) => {
     res.status(200).json({
       message: "All users from the database are:",
       userlist: listAllUsers.map((user) => user.username),
+      useremail: listAllUsers.map((user) => user.email),
     });
   } catch (error) {
     console.log(error);

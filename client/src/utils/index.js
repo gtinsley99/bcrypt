@@ -166,3 +166,32 @@ export const AuthCheck = async (jwt_token, setUser) => {
     console.log(error);
   }
 };
+
+export const UpdateEmailRoute = async (
+  cookie,
+  updEmail,
+  setError,
+  setShowModal
+) => {
+  try {
+    const res = await fetch("http://localhost:80/users/updateemail", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${cookie}`,
+      },
+      body: JSON.stringify({
+        newemail: updEmail
+      }),
+    });
+    if (!res.ok) {
+      throw new Error(res.statusText);
+    }
+    const data = await res.json();
+    setShowModal(true);
+  } catch (error) {
+    console.log(error);
+    setError(error);
+    setShowModal(true);
+  }
+};

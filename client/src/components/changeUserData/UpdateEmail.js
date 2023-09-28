@@ -1,10 +1,16 @@
 import { useState } from "react";
+import { UpdateEmailRoute } from "../../utils";
+import { readCookie } from "../../common";
 
-const UpdateEmail = () => {
+const UpdateEmail = (props) => {
   const [email, setEmail] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    let cookie = readCookie("jwt_token");
+    if (cookie !== false) {
+      await UpdateEmailRoute(cookie, email, props.setError, props.setShowModal);
+    };
     setEmail("");
   };
 

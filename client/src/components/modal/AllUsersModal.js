@@ -8,13 +8,15 @@ const Modal = (props) => {
     <div className="modalBackgrnd">
       <div className="modal">
         <h2>All users</h2>
+        <div className="usersBox">
         {props.usersList.map((username, index) => {
           return (
-          <div key={index} className="usersBox">
+          <div key={index}>
             <p>{props.usersList[index]}</p>
           </div>
           );
         })}
+        </div>
         <button onClick={handleClick}>Close</button>
       </div>
     </div>

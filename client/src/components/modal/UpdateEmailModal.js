@@ -7,11 +7,11 @@ const UpdateEmailModal = (props) => {
     return (
       <div className="modalBackgrnd">
         <div className="modal">
-          {/* {props.error.message === "Not Implemented" ? ( */}
-            <p>Email updated</p>
-        {/* //   ) : (
-        //     <p>User deleted</p>
-        //   )} */}
+          {props.error === null ? (
+            <p>Email updated</p>) : (
+              <p>Invalid email address</p>
+            )}
+            
           <button onClick={handleClick}>Close</button>
         </div>
       </div>
