@@ -11,7 +11,7 @@ const ChangeUserData = (props) => {
         <UpdateEmail />
       </div>
       <div className="userOptions">
-        <UpdatePassword />
+        <UpdatePassword setError={props.setError} setShowModal={props.setShowUpdPassModal} />
         <ListAllUsers setShowUsers={props.setShowUsers} />
       </div>
     </div>

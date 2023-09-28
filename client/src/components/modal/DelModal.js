@@ -1,6 +1,7 @@
 const DeleteUserModal = (props) => {
   const handleClick = () => {
     props.setShowModal(false);
+    props.setError(null);
   };
 
   return (

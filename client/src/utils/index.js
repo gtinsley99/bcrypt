@@ -81,4 +81,27 @@ export const RegisterRoute = async (regUsername, regEmail, regPassword, setUser,
       setError(error);
       setShowModal(true);
     }
+  };
+
+  export const UpdatePasswordRoute = async (updUsername, updPassword, updNewPassword, setError, setShowModal) => {
+    try {
+      const res = await fetch("http://localhost:80/users/updatepassword", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: updUsername,
+          password: updPassword,
+          newpassword: updNewPassword
+        }),
+      });
+      if (!res.ok) {
+        throw new Error(res.statusText);
+      }
+      const data = await res.json();
+      setShowModal(true);
+    } catch (error) {
+      console.log(error);
+      setError(error);
+      setShowModal(true);
+    }
   }
