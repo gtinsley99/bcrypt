@@ -1,28 +1,28 @@
 import { storeCookie } from "../common";
 
 export const ListAllUsersRoute = async (
-  jwt_token,
+  cookie,
   setUsersList,
   setError,
   setShowModal
 ) => {
   try {
-    const res = await fetch("localhost/users/listallusers", {
+    const res = await fetch("http://localhost/users/listallusers", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${jwt_token}`,
+        "Authorization": `Bearer ${cookie}`,
       },
     });
     if (!res.ok) {
       throw new Error(res.statusText);
     }
     const data = await res.json();
-    console.log(data);
-    setUsersList(data);
+    setUsersList(data.userlist);
     setShowModal(true);
   } catch (error) {
     console.log(error);
+    console.log(cookie);
     setError(error);
     setShowModal(true);
   }

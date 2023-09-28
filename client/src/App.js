@@ -14,7 +14,6 @@ import UpdateEmailModal from "./components/modal/UpdateEmailModal";
 import UpdatePassModal from "./components/modal/UpdatePassModal";
 import { readCookie } from "./common";
 import { AuthCheck } from "./utils";
-// import { readCookie } from "./common";
 
 function App() {
   const [showUsers, setShowUsers] = useState(false);
@@ -28,7 +27,7 @@ function App() {
   const [showUpdEmailModal, setShowUpdEmailModal] = useState(false);
 
   const loginWithToken = async (cookie) => {
-    const user = await AuthCheck(cookie, setUser);
+    await AuthCheck(cookie, setUser);
   };
 
   useEffect(() => {
@@ -54,7 +53,7 @@ function App() {
         setError={setError}
       />
       <ChangeUserData
-        showUsers={setShowUsers}
+        setShowUsers={setShowUsers}
         setError={setError}
         setUser={setUser}
         setShowDelModal={setShowDelModal}

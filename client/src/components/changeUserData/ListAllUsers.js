@@ -1,11 +1,17 @@
 import { ListAllUsersRoute } from "../../utils";
+import { readCookie } from "../../common";
 
 const ListAllUsers = (props) => {
-    let jwt_token = 1;
+    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await ListAllUsersRoute(jwt_token, props.setUsersList, props.setError, props.setShowModal)
-    }
+        let cookie = readCookie("jwt_token");
+        if (cookie !== false){
+            await ListAllUsersRoute(cookie, props.setUsersList, props.setError, props.setShowModal)
+        };
+    };
+
     return(
         <div>
         <h2>Show all users</h2>
