@@ -20,10 +20,22 @@ const registerUser = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+    if (error.errors[0].message === "username must be unique"){
+      res.status(409).json({
+        message: "Username taken"
+      });
+      return;
+    } else if (error.errors[0].message === "Validation is on email failed"){
+      res.status(400).json({
+        message: "Invalid email address"
+      });
+      return;
+    }
     res.status(501).json({
       message: error.message,
       detail: error
     });
+  
   }
 };
 
@@ -32,7 +44,8 @@ const listAllUsers = async (req, res) => {
     const listAllUsers = await User.findAll({});
     res.status(200).json({
       message: "All users from the database are:",
-      userlist: listAllUsers,
+      userlist: listAllUsers.map((user) => user.username),
+      useremail: listAllUsers.map((user) => user.email),
     });
   } catch (error) {
     console.log(error);
@@ -128,11 +141,31 @@ const loginUser = async (req, res) => {
   }
 };
 
+const loginWithToken = async (req, res) => {
+  try {
+    const userDetails = await User.findOne({where: {username: req.user.username}});
+    res.status(201).json({
+      message: "User logged in",
+      user: {
+        username: userDetails.username,
+        email: userDetails.email,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(501).json({
+      message: error.message,
+      detail: error
+    });
+  }
+}
+
 module.exports = {
   registerUser,
   listAllUsers,
   deleteUser,
   updateEmail,
   updatePassword,
-  loginUser
+  loginUser,
+  loginWithToken
 };
