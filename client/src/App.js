@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // components
 import Title from "./components/title/Title";
@@ -12,6 +12,8 @@ import RegErrorModal from "./components/modal/RegErrorModal";
 import DeleteUserModal from "./components/modal/DelModal";
 import UpdateEmailModal from "./components/modal/UpdateEmailModal";
 import UpdatePassModal from "./components/modal/UpdatePassModal";
+import { readCookie } from "./common";
+import { AuthCheck } from "./utils";
 // import { readCookie } from "./common";
 
 function App() {
@@ -24,6 +26,18 @@ function App() {
   const [showDelModal, setShowDelModal] = useState(false);
   const [showUpdPassModal, setShowUpdPassModal] = useState(false);
   const [showUpdEmailModal, setShowUpdEmailModal] = useState(false);
+
+  const loginWithToken = async (cookie) => {
+    const user = await AuthCheck(cookie, setUser);
+  };
+
+  useEffect(() => {
+    let cookie = readCookie("jwt_token");
+    if (cookie !== false){
+      loginWithToken(cookie);
+    };
+  }, []);
+
 
   return (
     <div className="App">

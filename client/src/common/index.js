@@ -11,18 +11,17 @@ export const storeCookie = (key, value, days) => {
 
   let cookie =
     (document.cookie = `${key} = ${value}; expires = ${date.toGMTString()}; path = /`);
-  console.log(cookie);
 };
 
-export const readCookie = (cookieName) => {
-  // pattern to find a cookie)
-  const re = new RegExp(`(?<=${cookieName}=)[^;]*`);
+export const readCookie = (cookieKey) => {
+  // pattern to find a cookie
+  const re = new RegExp(`(?<=${cookieKey}=)[^;]*`);
   try {
     let cookie = document.cookie.match(re)[0];
-    console.log(cookie);
     // try and find a cookie matching
     // the pattern in the regular expression, in this case the cookie name
     // if cookie isn't found, this will raise an error and throw it to the catch block
+    return cookie;
   } catch (error) {
     return false;
   }
