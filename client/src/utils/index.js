@@ -11,7 +11,7 @@ export const Usersapi = async (setUsersList) => {
   }
 };
 
-export const LoginRoute = async (logUsername, logPassword, setRes, setShowModal) => {
+export const LoginRoute = async (logUsername, logPassword, setUser, setError, setShowModal) => {
   try {
     const res = await fetch("http://localhost/users/login", {
       method: "POST",
@@ -26,14 +26,15 @@ export const LoginRoute = async (logUsername, logPassword, setRes, setShowModal)
     }
     const data = await res.json();
     console.log(data);
-    setRes(data);
-    setShowModal(true);
+    setUser(data.user.username);
   } catch (error) {
     console.log(error);
+    setError(error);
+    setShowModal(true);
   }
 };
 
-export const RegisterRoute = async (regUsername, regEmail, regPassword, setRes) => {
+export const RegisterRoute = async (regUsername, regEmail, regPassword, setUser, setError, setShowModal) => {
     try {
       const res = await fetch("http://localhost:80/users/register", {
         method: "POST",
@@ -49,8 +50,10 @@ export const RegisterRoute = async (regUsername, regEmail, regPassword, setRes) 
       }
       const data = await res.json();
       console.log(data);
-      setRes(data);
+      setUser(data.user.username);
     } catch (error) {
       console.log(error);
+      setError(error);
+      setShowModal(true);
     }
   };
