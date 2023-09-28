@@ -9,8 +9,8 @@ export const storeCookie = (key, value, days) => {
   // Setting date plus number of days we want cookie to last
   date.setDate(date.getDate() + days);
 
-  let cookie =
-    (document.cookie = `${key} = ${value}; expires = ${date.toGMTString()}; path = /`);
+  document.cookie = `${key} = ${value}; expires = ${date.toGMTString()}; path = /`;
+  console.log(document.cookie);
 };
 
 export const readCookie = (cookieKey) => {

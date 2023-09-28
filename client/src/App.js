@@ -40,7 +40,7 @@ function App() {
 
   return (
     <div className="App">
-      <Title user={user} />
+      <Title user={user} setUser={setUser}/>
       <Register
         setShowModal={setShowRegErrorModal}
         setUser={setUser}
