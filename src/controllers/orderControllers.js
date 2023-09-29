@@ -26,6 +26,24 @@ const addOrder = async (req, res) => {
     }
   };
 
+  const showOrders = async (req, res) => {
+    try {
+        const listAllOrders = await Order.findAll({where:{UserId: req.user.id}});
+        res.status(200).json({
+          message: "All Orders for user are:",
+          itemlist: listAllOrders.map((order) => order.item),
+          quantitylist: listAllOrders.map((order) => order.quantity),
+        });
+      } catch (error) {
+        console.log(error);
+        res.status(501).json({
+          message: error.message,
+          detail: error
+        });
+      }
+  };
+
   module.exports = {
     addOrder,
+    showOrders,
   }
