@@ -17,6 +17,7 @@ import { AuthCheck } from "./utils";
 import Orders from "./components/orders/Orders";
 import OrdersModal from "./components/modal/OrdersModal";
 import CancelOrderModal from "./components/modal/CancelOrderModal";
+import AddOrderModal from "./components/modal/AddOrderModal";
 
 function App() {
   const [showUsers, setShowUsers] = useState(false);
@@ -31,6 +32,7 @@ function App() {
   const [ordersList, setOrdersList] = useState(null);
   const [showOrdersModal, setShowOrdersModal] = useState(false);
   const [showCancelOrderModal, setShowCancelOrderModal] = useState(false);
+  const [showAddOrderModal, setShowAddOrderModal] = useState(false);
 
   const loginWithToken = async (cookie) => {
     await AuthCheck(cookie, setUser);
@@ -38,15 +40,14 @@ function App() {
 
   useEffect(() => {
     let cookie = readCookie("jwt_token");
-    if (cookie !== false){
+    if (cookie !== false) {
       loginWithToken(cookie);
-    };
+    }
   }, []);
-
 
   return (
     <div className="App">
-      <Title user={user} setUser={setUser}/>
+      <Title user={user} setUser={setUser} />
       <Register
         setShowModal={setShowRegErrorModal}
         setUser={setUser}
@@ -67,12 +68,27 @@ function App() {
         setShowUpdEmailModal={setShowUpdEmailModal}
         setUsersList={setUsersList}
       />
-      {user !== "" && (<Orders setError={setError} setOrdersList={setOrdersList} setShowOrdersModal={setShowOrdersModal} setShowCancelOrderModal={setShowCancelOrderModal}/>)}
+      {user !== "" && (
+        <Orders
+          setError={setError}
+          setOrdersList={setOrdersList}
+          setShowOrdersModal={setShowOrdersModal}
+          setShowCancelOrderModal={setShowCancelOrderModal}
+          setShowAddOrderModal={setShowAddOrderModal}
+        />
+      )}
       {showUsers && (
-        <AllUsersModal setShowModal={setShowUsers} usersList={usersList} setError={setError} />
+        <AllUsersModal
+          setShowModal={setShowUsers}
+          usersList={usersList}
+          setError={setError}
+        />
       )}
       {showLogErrorModal && (
-        <LoginErrorModal setShowModal={setShowLogErrorModal} setError={setError} />
+        <LoginErrorModal
+          setShowModal={setShowLogErrorModal}
+          setError={setError}
+        />
       )}
       {showRegErrorModal && (
         <RegErrorModal
@@ -103,7 +119,7 @@ function App() {
           setError={setError}
         />
       )}
-          {showOrdersModal && (
+      {showOrdersModal && (
         <OrdersModal
           setShowModal={setShowOrdersModal}
           error={error}
@@ -112,9 +128,16 @@ function App() {
           setOrdersList={setOrdersList}
         />
       )}
-            {showCancelOrderModal && (
+      {showCancelOrderModal && (
         <CancelOrderModal
           setShowModal={setShowCancelOrderModal}
+          error={error}
+          setError={setError}
+        />
+      )}
+      {showAddOrderModal && (
+        <AddOrderModal
+          setShowModal={setShowAddOrderModal}
           error={error}
           setError={setError}
         />

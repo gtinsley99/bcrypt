@@ -196,7 +196,7 @@ export const UpdateEmailRoute = async (
   }
 };
 
-export const AddOrderRoute = async (cookie, orderItem, orderQuantity, setError) => {
+export const AddOrderRoute = async (cookie, orderItem, orderQuantity, setError, setShowModal) => {
   try {
     const res = await fetch("http://localhost:80/orders/addorder", {
       method: "POST",
@@ -213,6 +213,8 @@ export const AddOrderRoute = async (cookie, orderItem, orderQuantity, setError) 
       throw new Error(res.statusText);
     }
     const data = await res.json();
+    setError(data);
+    setShowModal(true);
    
   } catch (error) {
     console.log(error);
