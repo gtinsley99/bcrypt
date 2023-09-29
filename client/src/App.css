@@ -101,8 +101,12 @@ input{
   margin: 5px;
 }
 
-#ordersModal{
+.ordersModal{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   max-height: 500px;
+  width: 100%;
   overflow-y: scroll;
 }
 
