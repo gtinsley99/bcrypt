@@ -219,4 +219,30 @@ export const AddOrderRoute = async (cookie, orderItem, orderQuantity, setError) 
     setError(error);
    
   }
-}
+};
+
+export const ShowOrdersRoute = async (
+  cookie,
+  setOrdersList,
+  setError,
+) => {
+  try {
+    const res = await fetch("http://localhost/orders/showorders", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${cookie}`,
+      },
+    });
+    if (!res.ok) {
+      throw new Error(res.statusText);
+    }
+    const data = await res.json();
+    setOrdersList(data);
+    console.log(data);
+    
+  } catch (error) {
+    console.log(error);
+    setError(error);
+  }
+};

@@ -26,6 +26,7 @@ function App() {
   const [showDelModal, setShowDelModal] = useState(false);
   const [showUpdPassModal, setShowUpdPassModal] = useState(false);
   const [showUpdEmailModal, setShowUpdEmailModal] = useState(false);
+  const [ordersList, setOrdersList] = useState(null);
 
   const loginWithToken = async (cookie) => {
     await AuthCheck(cookie, setUser);
@@ -62,7 +63,7 @@ function App() {
         setShowUpdEmailModal={setShowUpdEmailModal}
         setUsersList={setUsersList}
       />
-      {user !== "" && (<Orders setError={setError}/>)}
+      {user !== "" && (<Orders setError={setError} setOrdersList={setOrdersList}/>)}
       {showUsers && (
         <AllUsersModal setShowModal={setShowUsers} usersList={usersList} setError={setError} />
       )}
