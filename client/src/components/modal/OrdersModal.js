@@ -7,8 +7,9 @@ const OrdersModal = (props) => {
     };
     return (
       <div className="modalBackgrnd">
-        <div className="modal" id="ordersModal">
+        <div className="modal">
             <h2>Orders:</h2>
+            <div className="ordersModal">
             {props.ordersList.length === 0 ? (
                 <p>No orders</p>
             ): (props.ordersList.map((order, index) => {
@@ -20,7 +21,7 @@ const OrdersModal = (props) => {
                     </div>
                     );
             }))}
-        
+          </div>
           <button onClick={handleClick}>Close</button>
         </div>
       </div>
