@@ -48,18 +48,18 @@ function App() {
   return (
     <div className="App">
       <Title user={user} setUser={setUser} />
-      <Register
+      {user === "" && <Register
         setShowModal={setShowRegErrorModal}
         setUser={setUser}
         setError={setError}
         error={error}
-      />
-      <Login
+      />}
+      {user === "" && <Login
         setShowModal={setShowLogErrorModal}
         setUser={setUser}
         setError={setError}
-      />
-      <ChangeUserData
+      />}
+      {user !== "" && <ChangeUserData
         setShowUsers={setShowUsers}
         setError={setError}
         setUser={setUser}
@@ -67,7 +67,7 @@ function App() {
         setShowUpdPassModal={setShowUpdPassModal}
         setShowUpdEmailModal={setShowUpdEmailModal}
         setUsersList={setUsersList}
-      />
+      />}
       {user !== "" && (
         <Orders
           setError={setError}
