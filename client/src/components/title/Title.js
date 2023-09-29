@@ -6,7 +6,7 @@ const Title = ({ user, setUser }) => {
       <div></div>
       {!user ? <h1>Welcome to the site</h1> : <h1>Welcome {user}</h1>}
       <div id="logoutCard">
-        <Logout setUser={setUser}/>
+        {user !== "" && <Logout setUser={setUser}/>}
       </div>
     </div>
   );

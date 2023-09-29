@@ -108,7 +108,6 @@ export const DeleteUserRoute = async (
     if (!res.ok) {
       throw new Error(res.statusText);
     }
-    const data = await res.json();
     setUser("");
     setShowModal(true);
   } catch (error) {
@@ -138,7 +137,6 @@ export const UpdatePasswordRoute = async (
     if (!res.ok) {
       throw new Error(res.statusText);
     }
-    const data = await res.json();
     setShowModal(true);
   } catch (error) {
     console.log(error);
@@ -187,11 +185,91 @@ export const UpdateEmailRoute = async (
     if (!res.ok) {
       throw new Error(res.statusText);
     }
-    const data = await res.json();
     setShowModal(true);
   } catch (error) {
     console.log(error);
     setError(error);
     setShowModal(true);
   }
+};
+
+export const AddOrderRoute = async (cookie, orderItem, orderQuantity, setError, setShowModal) => {
+  try {
+    const res = await fetch("http://localhost:80/orders/addorder", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${cookie}`,
+      },
+      body: JSON.stringify({
+        item: orderItem,
+        quantity: orderQuantity
+      }),
+    });
+    if (!res.ok) {
+      throw new Error(res.statusText);
+    }
+    const data = await res.json();
+    setError(data);
+    setShowModal(true);
+   
+  } catch (error) {
+    console.log(error);
+    setError(error);
+   
+  }
+};
+
+export const ShowOrdersRoute = async (
+  cookie,
+  setOrdersList,
+  setError,
+  setShowModal
+) => {
+  try {
+    const res = await fetch("http://localhost/orders/showorders", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${cookie}`,
+      },
+    });
+    if (!res.ok) {
+      throw new Error(res.statusText);
+    }
+    const data = await res.json();
+    setOrdersList(data.list);
+    setShowModal(true);
+    
+  } catch (error) {
+    console.log(error);
+    setError(error);
+  }
+};
+
+export const CancelOrderRoute = async (cookie, orderId,  setError, setShowModal) => {
+  try {
+    const res = await fetch("http://localhost:80/orders/cancelorder", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${cookie}`,
+      },
+      body: JSON.stringify({
+        id: orderId
+      }),
+    });
+    if (!res.ok) {
+      throw new Error(res.statusText);
+    }
+    const data = await res.json();
+    console.log(data)
+    setError(data);
+    setShowModal(true);
+    
+  } catch (error) {
+    console.log(error);
+    setError(error);
+    setShowModal(true);
+  };
 };
