@@ -6,11 +6,11 @@ const Orders = (props) => {
     return(
         <div className="ordersCard">
             <div className="userOptions">
-            <AddOrder setError={props.setError} setShowModal={props.setShowAddOrderModal}/>
-            <CancelOrder setError={props.setError} setShowModal={props.setShowCancelOrderModal}/>
+            <AddOrder setRes={props.setRes} setShowModal={props.setShowAddOrderModal}/>
+            <CancelOrder setRes={props.setRes} setShowModal={props.setShowCancelOrderModal}/>
             </div>
             <div className="showOrders">
-            <ShowOrders setError={props.setError} setOrdersList={props.setOrdersList} setShowModal={props.setShowOrdersModal} />
+            <ShowOrders setRes={props.setRes} setOrdersList={props.setOrdersList} setShowModal={props.setShowOrdersModal} />
             </div>
         </div>
     )

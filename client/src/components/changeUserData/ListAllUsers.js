@@ -8,7 +8,7 @@ const ListAllUsers = (props) => {
         e.preventDefault();
         let cookie = readCookie("jwt_token");
         if (cookie !== false){
-            await ListAllUsersRoute(cookie, props.setUsersList, props.setError, props.setShowModal)
+            await ListAllUsersRoute(cookie, props.setUsersList, props.setRes, props.setShowModal)
         };
     };
 

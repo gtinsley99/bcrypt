@@ -22,7 +22,7 @@ import AddOrderModal from "./components/modal/AddOrderModal";
 function App() {
   const [showUsers, setShowUsers] = useState(false);
   const [usersList, setUsersList] = useState();
-  const [error, setError] = useState(null);
+  const [res, setRes] = useState(null);
   const [showLogErrorModal, setShowLogErrorModal] = useState(false);
   const [user, setUser] = useState("");
   const [showRegErrorModal, setShowRegErrorModal] = useState(false);
@@ -51,17 +51,17 @@ function App() {
       {user === "" && <Register
         setShowModal={setShowRegErrorModal}
         setUser={setUser}
-        setError={setError}
-        error={error}
+        setRes={setRes}
+        res={res}
       />}
       {user === "" && <Login
         setShowModal={setShowLogErrorModal}
         setUser={setUser}
-        setError={setError}
+        setRes={setRes}
       />}
       {user !== "" && <ChangeUserData
         setShowUsers={setShowUsers}
-        setError={setError}
+        setRes={setRes}
         setUser={setUser}
         setShowDelModal={setShowDelModal}
         setShowUpdPassModal={setShowUpdPassModal}
@@ -70,7 +70,7 @@ function App() {
       />}
       {user !== "" && (
         <Orders
-          setError={setError}
+          setRes={setRes}
           setOrdersList={setOrdersList}
           setShowOrdersModal={setShowOrdersModal}
           setShowCancelOrderModal={setShowCancelOrderModal}
@@ -81,49 +81,49 @@ function App() {
         <AllUsersModal
           setShowModal={setShowUsers}
           usersList={usersList}
-          setError={setError}
+          setRes={setRes}
         />
       )}
       {showLogErrorModal && (
         <LoginErrorModal
           setShowModal={setShowLogErrorModal}
-          setError={setError}
+          setRes={setRes}
         />
       )}
       {showRegErrorModal && (
         <RegErrorModal
           setShowModal={setShowRegErrorModal}
-          error={error}
-          setError={setError}
+          res={res}
+          setRes={setRes}
         />
       )}
       {showDelModal && (
         <DeleteUserModal
           setShowModal={setShowDelModal}
-          error={error}
-          setError={setError}
+          res={res}
+          setRes={setRes}
           user={user}
         />
       )}
       {showUpdPassModal && (
         <UpdatePassModal
           setShowModal={setShowUpdPassModal}
-          error={error}
-          setError={setError}
+          res={res}
+          setRes={setRes}
         />
       )}
       {showUpdEmailModal && (
         <UpdateEmailModal
           setShowModal={setShowUpdEmailModal}
-          error={error}
-          setError={setError}
+          res={res}
+          setRes={setRes}
         />
       )}
       {showOrdersModal && (
         <OrdersModal
           setShowModal={setShowOrdersModal}
-          error={error}
-          setError={setError}
+          res={res}
+          setRes={setRes}
           ordersList={ordersList}
           setOrdersList={setOrdersList}
         />
@@ -131,15 +131,15 @@ function App() {
       {showCancelOrderModal && (
         <CancelOrderModal
           setShowModal={setShowCancelOrderModal}
-          error={error}
-          setError={setError}
+          res={res}
+          setRes={setRes}
         />
       )}
       {showAddOrderModal && (
         <AddOrderModal
           setShowModal={setShowAddOrderModal}
-          error={error}
-          setError={setError}
+          res={res}
+          setRes={setRes}
         />
       )}
     </div>

@@ -2,7 +2,7 @@ const Modal = (props) => {
   const handleClick = (e) => {
     e.preventDefault();
     props.setShowModal(false);
-    props.setError(null);
+    props.setRes(null);
   };
   return (
     <div className="modalBackgrnd">

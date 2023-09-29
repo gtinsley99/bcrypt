@@ -20,7 +20,7 @@ const CancelOrder = (props) => {
     e.preventDefault();
     let cookie = readCookie("jwt_token");
     if (cookie !== false && id !== "") {
-      await CancelOrderRoute(cookie, id, props.setError, props.setShowModal);
+      await CancelOrderRoute(cookie, id, props.setRes, props.setShowModal);
     }
     setId("");
     setButton(true);

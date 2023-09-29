@@ -3,7 +3,7 @@ import { storeCookie } from "../common";
 export const ListAllUsersRoute = async (
   cookie,
   setUsersList,
-  setError,
+  setRes,
   setShowModal
 ) => {
   try {
@@ -11,7 +11,7 @@ export const ListAllUsersRoute = async (
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${cookie}`,
+        Authorization: `Bearer ${cookie}`,
       },
     });
     if (!res.ok) {
@@ -23,17 +23,16 @@ export const ListAllUsersRoute = async (
   } catch (error) {
     console.log(error);
     console.log(cookie);
-    setError(error);
+    setRes(error);
     setShowModal(true);
   }
 };
-
 
 export const LoginRoute = async (
   logUsername,
   logPassword,
   setUser,
-  setError,
+  setRes,
   setShowModal
 ) => {
   try {
@@ -53,7 +52,7 @@ export const LoginRoute = async (
     storeCookie("jwt_token", data.user.token, 7);
   } catch (error) {
     console.log(error);
-    setError(error);
+    setRes(error);
     setShowModal(true);
   }
 };
@@ -63,7 +62,7 @@ export const RegisterRoute = async (
   regEmail,
   regPassword,
   setUser,
-  setError,
+  setRes,
   setShowModal
 ) => {
   try {
@@ -84,7 +83,7 @@ export const RegisterRoute = async (
     storeCookie("jwt_token", data.user.token, 7);
   } catch (error) {
     console.log(error);
-    setError(error);
+    setRes(error);
     setShowModal(true);
   }
 };
@@ -93,7 +92,7 @@ export const DeleteUserRoute = async (
   delUsername,
   delPassword,
   setUser,
-  setError,
+  setRes,
   setShowModal
 ) => {
   try {
@@ -112,7 +111,7 @@ export const DeleteUserRoute = async (
     setShowModal(true);
   } catch (error) {
     console.log(error);
-    setError(error);
+    setRes(error);
     setShowModal(true);
   }
 };
@@ -121,7 +120,7 @@ export const UpdatePasswordRoute = async (
   updUsername,
   updPassword,
   updNewPassword,
-  setError,
+  setRes,
   setShowModal
 ) => {
   try {
@@ -140,7 +139,7 @@ export const UpdatePasswordRoute = async (
     setShowModal(true);
   } catch (error) {
     console.log(error);
-    setError(error);
+    setRes(error);
     setShowModal(true);
   }
 };
@@ -151,15 +150,14 @@ export const AuthCheck = async (jwt_token, setUser) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${jwt_token}`,
+        Authorization: `Bearer ${jwt_token}`,
       },
     });
     if (!res.ok) {
       throw new Error(res.statusText);
-    };
+    }
     const data = await res.json();
     setUser(data.user.username);
-
   } catch (error) {
     console.log(error);
   }
@@ -168,7 +166,7 @@ export const AuthCheck = async (jwt_token, setUser) => {
 export const UpdateEmailRoute = async (
   cookie,
   updEmail,
-  setError,
+  setRes,
   setShowModal
 ) => {
   try {
@@ -176,10 +174,10 @@ export const UpdateEmailRoute = async (
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${cookie}`,
+        Authorization: `Bearer ${cookie}`,
       },
       body: JSON.stringify({
-        newemail: updEmail
+        newemail: updEmail,
       }),
     });
     if (!res.ok) {
@@ -188,42 +186,46 @@ export const UpdateEmailRoute = async (
     setShowModal(true);
   } catch (error) {
     console.log(error);
-    setError(error);
+    setRes(error);
     setShowModal(true);
   }
 };
 
-export const AddOrderRoute = async (cookie, orderItem, orderQuantity, setError, setShowModal) => {
+export const AddOrderRoute = async (
+  cookie,
+  orderItem,
+  orderQuantity,
+  setRes,
+  setShowModal
+) => {
   try {
     const res = await fetch("http://localhost:80/orders/addorder", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${cookie}`,
+        Authorization: `Bearer ${cookie}`,
       },
       body: JSON.stringify({
         item: orderItem,
-        quantity: orderQuantity
+        quantity: orderQuantity,
       }),
     });
     if (!res.ok) {
       throw new Error(res.statusText);
     }
     const data = await res.json();
-    setError(data);
+    setRes(data);
     setShowModal(true);
-   
   } catch (error) {
     console.log(error);
-    setError(error);
-   
+    setRes(error);
   }
 };
 
 export const ShowOrdersRoute = async (
   cookie,
   setOrdersList,
-  setError,
+  setRes,
   setShowModal
 ) => {
   try {
@@ -231,7 +233,7 @@ export const ShowOrdersRoute = async (
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${cookie}`,
+        Authorization: `Bearer ${cookie}`,
       },
     });
     if (!res.ok) {
@@ -240,36 +242,39 @@ export const ShowOrdersRoute = async (
     const data = await res.json();
     setOrdersList(data.list);
     setShowModal(true);
-    
   } catch (error) {
     console.log(error);
-    setError(error);
+    setRes(error);
   }
 };
 
-export const CancelOrderRoute = async (cookie, orderId,  setError, setShowModal) => {
+export const CancelOrderRoute = async (
+  cookie,
+  orderId,
+  setRes,
+  setShowModal
+) => {
   try {
     const res = await fetch("http://localhost:80/orders/cancelorder", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${cookie}`,
+        Authorization: `Bearer ${cookie}`,
       },
       body: JSON.stringify({
-        id: orderId
+        id: orderId,
       }),
     });
     if (!res.ok) {
       throw new Error(res.statusText);
     }
     const data = await res.json();
-    console.log(data)
-    setError(data);
+    console.log(data);
+    setRes(data);
     setShowModal(true);
-    
   } catch (error) {
     console.log(error);
-    setError(error);
+    setRes(error);
     setShowModal(true);
-  };
+  }
 };

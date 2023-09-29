@@ -9,22 +9,22 @@ const ChangeUserData = (props) => {
       <div className="userOptions">
         <ListAllUsers
           setShowModal={props.setShowUsers}
-          setError={props.setError}
+          setRes={props.setRes}
           setUsersList={props.setUsersList}
         />
         <UpdateEmail
-          setError={props.setError}
+          setRes={props.setRes}
           setShowModal={props.setShowUpdEmailModal}
         />
       </div>
       <div className="userOptions">
         <UpdatePassword
-          setError={props.setError}
+          setRes={props.setRes}
           setShowModal={props.setShowUpdPassModal}
         />
         <DeleteAccount
           setUser={props.setUser}
-          setError={props.setError}
+          setRes={props.setRes}
           setShowModal={props.setShowDelModal}
         />
       </div>

@@ -2,7 +2,7 @@ const OrdersModal = (props) => {
 
     const handleClick = () => {
       props.setShowModal(false);
-      props.setError(null);
+      props.setRes(null);
       props.setOrdersList(null);
     };
     return (
