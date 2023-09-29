@@ -16,6 +16,7 @@ import { readCookie } from "./common";
 import { AuthCheck } from "./utils";
 import Orders from "./components/orders/Orders";
 import OrdersModal from "./components/modal/OrdersModal";
+import CancelOrderModal from "./components/modal/CancelOrderModal";
 
 function App() {
   const [showUsers, setShowUsers] = useState(false);
@@ -29,6 +30,7 @@ function App() {
   const [showUpdEmailModal, setShowUpdEmailModal] = useState(false);
   const [ordersList, setOrdersList] = useState(null);
   const [showOrdersModal, setShowOrdersModal] = useState(false);
+  const [showCancelOrderModal, setShowCancelOrderModal] = useState(false);
 
   const loginWithToken = async (cookie) => {
     await AuthCheck(cookie, setUser);
@@ -65,7 +67,7 @@ function App() {
         setShowUpdEmailModal={setShowUpdEmailModal}
         setUsersList={setUsersList}
       />
-      {user !== "" && (<Orders setError={setError} setOrdersList={setOrdersList} setShowOrdersModal={setShowOrdersModal}/>)}
+      {user !== "" && (<Orders setError={setError} setOrdersList={setOrdersList} setShowOrdersModal={setShowOrdersModal} setShowCancelOrderModal={setShowCancelOrderModal}/>)}
       {showUsers && (
         <AllUsersModal setShowModal={setShowUsers} usersList={usersList} setError={setError} />
       )}
@@ -108,6 +110,13 @@ function App() {
           setError={setError}
           ordersList={ordersList}
           setOrdersList={setOrdersList}
+        />
+      )}
+            {showCancelOrderModal && (
+        <CancelOrderModal
+          setShowModal={setShowCancelOrderModal}
+          error={error}
+          setError={setError}
         />
       )}
     </div>

@@ -9,7 +9,7 @@ const OrdersModal = (props) => {
       <div className="modalBackgrnd">
         <div className="modal" id="ordersModal">
             <h2>Orders:</h2>
-            {props.ordersList.length === null ? (
+            {props.ordersList.length === 0 ? (
                 <p>No orders</p>
             ): (props.ordersList.map((order, index) => {
                 return (

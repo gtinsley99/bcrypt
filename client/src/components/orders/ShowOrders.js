@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { ShowOrdersRoute } from "../../utils";
 import { readCookie } from "../../common";
 
@@ -22,4 +21,4 @@ const ShowOrders = (props) => {
     );
 };
 
-export default ShowOrders
+export default ShowOrders;

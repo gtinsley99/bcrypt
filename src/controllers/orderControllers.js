@@ -56,6 +56,7 @@ const deleteOrder = async (req, res) => {
         id: req.body.id,
       });
     } else {
+      orderDetails.destroy();
       res.status(200).json({
         message: "Order cancelled",
         item: orderDetails.item,

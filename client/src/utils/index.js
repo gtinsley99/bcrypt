@@ -240,11 +240,37 @@ export const ShowOrdersRoute = async (
     }
     const data = await res.json();
     setOrdersList(data.list);
-    console.log(data)
     setShowModal(true);
     
   } catch (error) {
     console.log(error);
     setError(error);
   }
+};
+
+export const CancelOrderRoute = async (cookie, orderId,  setError, setShowModal) => {
+  try {
+    const res = await fetch("http://localhost:80/orders/cancelorder", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${cookie}`,
+      },
+      body: JSON.stringify({
+        id: orderId
+      }),
+    });
+    if (!res.ok) {
+      throw new Error(res.statusText);
+    }
+    const data = await res.json();
+    console.log(data)
+    setError(data);
+    setShowModal(true);
+    
+  } catch (error) {
+    console.log(error);
+    setError(error);
+    setShowModal(true);
+  };
 };
