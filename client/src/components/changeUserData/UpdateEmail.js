@@ -4,7 +4,17 @@ import { readCookie } from "../../common";
 
 const UpdateEmail = (props) => {
   const [email, setEmail] = useState("");
+  const [button, setButton] = useState(true)
 
+  const activateButton = (e) => {
+    e.preventDefault();
+    setEmail(e.target.value);
+    if (e.target.value === ""){
+      setButton(true);
+    } else {
+      setButton(false)
+    }
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
     let cookie = readCookie("jwt_token");
@@ -12,6 +22,7 @@ const UpdateEmail = (props) => {
       await UpdateEmailRoute(cookie, email, props.setError, props.setShowModal);
     };
     setEmail("");
+    setButton(true);
   };
 
   return (
@@ -23,10 +34,10 @@ const UpdateEmail = (props) => {
           <input
             placeholder="Insert new email here..."
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={activateButton}
           ></input>
         </div>
-        <button type="submit">Update</button>
+        <button type="submit" disabled={button}>Update</button>
       </form>
     </div>
   );
