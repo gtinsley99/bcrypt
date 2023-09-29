@@ -1,13 +1,13 @@
 const UpdateEmailModal = (props) => {
     const handleClick = () => {
       props.setShowModal(false);
-      props.setError(null);
+      props.setRes(null);
     };
   
     return (
       <div className="modalBackgrnd">
         <div className="modal">
-          {props.error === null ? (
+          {props.res === null ? (
             <p>Email updated</p>) : (
               <p>Invalid email address</p>
             )}

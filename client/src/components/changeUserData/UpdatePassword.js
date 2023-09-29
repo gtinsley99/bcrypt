@@ -12,7 +12,7 @@ const UpdatePassword = (props) => {
       username,
       password,
       newPassword,
-      props.setError,
+      props.setRes,
       props.setShowModal
     );
     setUsername("");

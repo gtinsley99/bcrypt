@@ -6,7 +6,7 @@ const DeleteAccount =  (props) => {
   const [password, setPassword] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await DeleteUserRoute(username, password, props.setUser, props.setError, props.setShowModal);
+    await DeleteUserRoute(username, password, props.setUser, props.setRes, props.setShowModal);
     setUsername("");
     setPassword("");
   };

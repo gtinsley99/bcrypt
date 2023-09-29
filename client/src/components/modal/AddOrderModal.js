@@ -1,15 +1,15 @@
 const AddOrderModal = (props) => {
     const handleClick = () => {
         props.setShowModal(false);
-        props.setError(null);
+        props.setRes(null);
       };
     
       return (
         <div className="modalBackgrnd">
           <div className="modal">
-            <h2>{props.error.message}</h2>
-            <p>Item: {props.error.order.item}</p>
-            <p>Quantity: {props.error.order.quantity}</p>
+            <h2>{props.res.message}</h2>
+            <p>Item: {props.res.order.item}</p>
+            <p>Quantity: {props.res.order.quantity}</p>
             <button onClick={handleClick}>Close</button>
           </div>
         </div>

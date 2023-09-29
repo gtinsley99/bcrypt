@@ -8,7 +8,7 @@ const Register = (props) => {
 
   const formSubmit = async (e) => {
     e.preventDefault();
-    await RegisterRoute(regUsername, regEmail, regPassword, props.setUser, props.setError, props.setShowModal);
+    await RegisterRoute(regUsername, regEmail, regPassword, props.setUser, props.setRes, props.setShowModal);
     setRegUsername("");
     setRegEmail("");
     setRegPassword("");

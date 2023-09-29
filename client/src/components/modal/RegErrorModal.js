@@ -1,12 +1,12 @@
 const RegErrorModal = (props) => {
   const handleClick = () => {
     props.setShowModal(false);
-    props.setError(null);
+    props.setRes(null);
   };
   return (
     <div className="modalBackgrnd">
       <div className="modal">
-        {props.error.message === "Conflict" ? (
+        {props.res.message === "Conflict" ? (
           <p>Error: Username taken</p>
         ) : (
           <p>Error: Invalid email address</p>

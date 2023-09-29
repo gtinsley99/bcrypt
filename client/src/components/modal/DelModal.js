@@ -1,16 +1,15 @@
 const DeleteUserModal = (props) => {
   const handleClick = () => {
     props.setShowModal(false);
-    props.setError(null);
+    props.setRes(null);
   };
-
   return (
     <div className="modalBackgrnd">
       <div className="modal">
-        {props.error.message === "Not Implemented" ? (
-          <p>Username or password incorrect</p>
-        ) : (
+        {props.res === null ? (
           <p>User deleted</p>
+        ) : (
+          <p>Username or password incorrect</p>
         )}
         <button onClick={handleClick}>Close</button>
       </div>

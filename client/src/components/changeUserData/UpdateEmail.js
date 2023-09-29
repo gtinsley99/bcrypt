@@ -19,7 +19,7 @@ const UpdateEmail = (props) => {
     e.preventDefault();
     let cookie = readCookie("jwt_token");
     if (cookie !== false) {
-      await UpdateEmailRoute(cookie, email, props.setError, props.setShowModal);
+      await UpdateEmailRoute(cookie, email, props.setRes, props.setShowModal);
     };
     setEmail("");
     setButton(true);
