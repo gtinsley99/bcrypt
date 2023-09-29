@@ -225,6 +225,7 @@ export const ShowOrdersRoute = async (
   cookie,
   setOrdersList,
   setError,
+  setShowModal
 ) => {
   try {
     const res = await fetch("http://localhost/orders/showorders", {
@@ -238,8 +239,9 @@ export const ShowOrdersRoute = async (
       throw new Error(res.statusText);
     }
     const data = await res.json();
-    setOrdersList(data);
-    console.log(data);
+    setOrdersList(data.list);
+    console.log(data)
+    setShowModal(true);
     
   } catch (error) {
     console.log(error);

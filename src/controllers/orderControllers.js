@@ -32,9 +32,8 @@ const showOrders = async (req, res) => {
     });
     res.status(200).json({
       message: "All Orders for user are:",
-      idlist: listAllOrders.map((order) => order.id),
-      itemlist: listAllOrders.map((order) => order.item),
-      quantitylist: listAllOrders.map((order) => order.quantity),
+      list: listAllOrders
+    
     });
   } catch (error) {
     console.log(error);

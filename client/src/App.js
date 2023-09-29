@@ -15,6 +15,7 @@ import UpdatePassModal from "./components/modal/UpdatePassModal";
 import { readCookie } from "./common";
 import { AuthCheck } from "./utils";
 import Orders from "./components/orders/Orders";
+import OrdersModal from "./components/modal/OrdersModal";
 
 function App() {
   const [showUsers, setShowUsers] = useState(false);
@@ -27,6 +28,7 @@ function App() {
   const [showUpdPassModal, setShowUpdPassModal] = useState(false);
   const [showUpdEmailModal, setShowUpdEmailModal] = useState(false);
   const [ordersList, setOrdersList] = useState(null);
+  const [showOrdersModal, setShowOrdersModal] = useState(false);
 
   const loginWithToken = async (cookie) => {
     await AuthCheck(cookie, setUser);
@@ -63,7 +65,7 @@ function App() {
         setShowUpdEmailModal={setShowUpdEmailModal}
         setUsersList={setUsersList}
       />
-      {user !== "" && (<Orders setError={setError} setOrdersList={setOrdersList}/>)}
+      {user !== "" && (<Orders setError={setError} setOrdersList={setOrdersList} setShowOrdersModal={setShowOrdersModal}/>)}
       {showUsers && (
         <AllUsersModal setShowModal={setShowUsers} usersList={usersList} setError={setError} />
       )}
@@ -97,6 +99,15 @@ function App() {
           setShowModal={setShowUpdEmailModal}
           error={error}
           setError={setError}
+        />
+      )}
+          {showOrdersModal && (
+        <OrdersModal
+          setShowModal={setShowOrdersModal}
+          error={error}
+          setError={setError}
+          ordersList={ordersList}
+          setOrdersList={setOrdersList}
         />
       )}
     </div>

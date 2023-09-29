@@ -10,7 +10,7 @@ const ShowOrders = (props) => {
         e.preventDefault();
         let cookie = readCookie("jwt_token");
         if (cookie !== false){
-            await ShowOrdersRoute(cookie, props.setOrdersList, props.setError)
+            await ShowOrdersRoute(cookie, props.setOrdersList, props.setError, props.setShowModal)
         };
     };
 
