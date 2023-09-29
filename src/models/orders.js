@@ -4,7 +4,7 @@ const SQLconnection = require("../db/connection");
 const Order = SQLconnection.define("Order", {
     item: {
         type: DataTypes.STRING,
-        unique: true,
+        unique: false,
         allowNull: false
     },
     quantity: {

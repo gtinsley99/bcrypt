@@ -195,3 +195,28 @@ export const UpdateEmailRoute = async (
     setShowModal(true);
   }
 };
+
+export const AddOrderRoute = async (cookie, orderItem, orderQuantity, setError) => {
+  try {
+    const res = await fetch("http://localhost:80/orders/addorder", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${cookie}`,
+      },
+      body: JSON.stringify({
+        item: orderItem,
+        quantity: orderQuantity
+      }),
+    });
+    if (!res.ok) {
+      throw new Error(res.statusText);
+    }
+    const data = await res.json();
+   
+  } catch (error) {
+    console.log(error);
+    setError(error);
+   
+  }
+}

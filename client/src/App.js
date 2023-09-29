@@ -14,6 +14,7 @@ import UpdateEmailModal from "./components/modal/UpdateEmailModal";
 import UpdatePassModal from "./components/modal/UpdatePassModal";
 import { readCookie } from "./common";
 import { AuthCheck } from "./utils";
+import Orders from "./components/orders/Orders";
 
 function App() {
   const [showUsers, setShowUsers] = useState(false);
@@ -61,6 +62,7 @@ function App() {
         setShowUpdEmailModal={setShowUpdEmailModal}
         setUsersList={setUsersList}
       />
+      {user !== "" && (<Orders setError={setError}/>)}
       {showUsers && (
         <AllUsersModal setShowModal={setShowUsers} usersList={usersList} setError={setError} />
       )}

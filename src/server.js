@@ -17,8 +17,8 @@ app.use(express.json());
 const syncTables = () => {
     User.hasMany(Order);
     Order.belongsTo(User);
-    User.sync({alter: true});
-    Order.sync();
+    User.sync();
+    Order.sync({alter: true});
    
 };
 
