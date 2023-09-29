@@ -4,7 +4,7 @@ import { readCookie } from "../../common";
 
 const UpdateEmail = (props) => {
   const [email, setEmail] = useState("");
-  const [button, setButton] = useState(true)
+  const [button, setButton] = useState(true);
 
   const activateButton = (e) => {
     e.preventDefault();
@@ -14,7 +14,7 @@ const UpdateEmail = (props) => {
     } else {
       setButton(false)
     }
-  }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     let cookie = readCookie("jwt_token");

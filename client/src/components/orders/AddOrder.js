@@ -8,9 +8,10 @@ const AddOrder = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let cookie = readCookie("jwt_token");
-    if (cookie !== false && orderItem !== ""){
-        await AddOrderRoute(cookie, orderItem, quantity, props.setError, props.setShowModal);
-    };
+    if (cookie !== false && orderItem !== "") {
+      await AddOrderRoute(cookie, orderItem, quantity, props.setError, props.setShowModal);
+    }
+    setOrderItem("");
     setQuantity("");
   };
   return (

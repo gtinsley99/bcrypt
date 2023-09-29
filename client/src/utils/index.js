@@ -108,7 +108,6 @@ export const DeleteUserRoute = async (
     if (!res.ok) {
       throw new Error(res.statusText);
     }
-    const data = await res.json();
     setUser("");
     setShowModal(true);
   } catch (error) {
@@ -138,7 +137,6 @@ export const UpdatePasswordRoute = async (
     if (!res.ok) {
       throw new Error(res.statusText);
     }
-    const data = await res.json();
     setShowModal(true);
   } catch (error) {
     console.log(error);
@@ -187,7 +185,6 @@ export const UpdateEmailRoute = async (
     if (!res.ok) {
       throw new Error(res.statusText);
     }
-    const data = await res.json();
     setShowModal(true);
   } catch (error) {
     console.log(error);

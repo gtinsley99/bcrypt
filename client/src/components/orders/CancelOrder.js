@@ -4,6 +4,17 @@ import { readCookie } from "../../common";
 
 const CancelOrder = (props) => {
   const [id, setId] = useState("");
+  const [button, setButton] = useState(true);
+
+  const activateButton = (e) => {
+    e.preventDefault();
+    setId(e.target.value);
+    if (e.target.value === ""){
+      setButton(true);
+    } else {
+      setButton(false)
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -12,6 +23,7 @@ const CancelOrder = (props) => {
       await CancelOrderRoute(cookie, id, props.setError, props.setShowModal);
     }
     setId("");
+    setButton(true);
   };
 
   return (
@@ -20,9 +32,9 @@ const CancelOrder = (props) => {
       <form onSubmit={handleSubmit}>
         <div className="inputField">
           <label>Order ID:</label>
-          <input type="number" min="0" value={id} onChange={(e) => setId(e.target.value)}></input>
+          <input type="number" min="0" value={id} onChange={activateButton}></input>
         </div>
-        <button type="submit">Cancel order</button>
+        <button type="submit" disabled={button}>Cancel order</button>
       </form>
     </div>
   );
